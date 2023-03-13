@@ -85,7 +85,9 @@ public class RankedComparator<T> implements Comparator<RankedProvider<T>> {
 
     @Override
     public int compare(final RankedProvider<T> o1, final RankedProvider<T> o2) {
-        return ((getPriority(o1) > getPriority(o2)) ? order.ordering : -order.ordering);
+        int o1Priority = getPriority(o1);
+        int o2Priority = getPriority(o2);
+        return (o1Priority < o2Priority) ? -order.ordering : ((o1Priority == o2Priority) ? 0 : order.ordering);
     }
 
     protected int getPriority(final RankedProvider<T> rankedProvider) {
