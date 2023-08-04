@@ -137,6 +137,9 @@
                 <configuration>
                     <forkCount>1</forkCount>
                     <reuseForks>true</reuseForks>
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
+                    </argLine>
                 </configuration>
             </plugin>
         </plugins>
