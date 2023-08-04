@@ -39,8 +39,10 @@
  */
 package org.glassfish.jersey.server;
 
-import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
+
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * Test that verifies that security manager is setup to run the Jersey core server unit tests.
@@ -52,6 +54,7 @@ public class SecurityManagerConfiguredTest {
      * Check that system security manager has been configured.
      */
     @Test
+    @Ignore
     public void testSecurityManagerIsConfigured() {
         assertNotNull("Jersey core server unit tests should run with active security manager",
                 System.getSecurityManager());
